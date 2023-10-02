@@ -9,7 +9,13 @@ namespace ObjLoader.Loader.Data.DataStore
         IList<Vertex> Vertices { get; }
         IList<Texture> Textures { get; }
         IList<Normal> Normals { get; }
-        IList<Material> Materials { get; }
         IList<Group> Groups { get; }
+        IList<string> MtlLibs { get; }
     }
+
+    public interface IDataStoreMtl
+    {
+        IList<Material> Materials { get; }
+    }
+
 }

@@ -10,13 +10,13 @@ namespace ObjLoader.Test.TypeParsers
     public class UseMaterialParserTests
     {
         private ElementGroupSpy _elementGroupSpy;
-        private UseMaterialParser _parser;
+        private MaterialNameParser _parser;
 
         [SetUp]
         public void SetUp()
         {
             _elementGroupSpy = new ElementGroupSpy();
-            _parser = new UseMaterialParser(_elementGroupSpy);
+            _parser = new MaterialNameParser(_elementGroupSpy);
         }
 
         [Test]
@@ -46,14 +46,15 @@ namespace ObjLoader.Test.TypeParsers
             _elementGroupSpy.MaterialName.Should().BeEquivalentTo("materialName");
         }
 
-        private class ElementGroupSpy : IElementGroup
+        private class ElementGroupSpy : IMaterialNameDataStore
         {
             public string MaterialName { get; private set; }
 
-            public void SetMaterial(string materialName)
+            public void PushMaterial(string materialName)
             {
                 MaterialName = materialName;
             }
+
         }
     }
 }

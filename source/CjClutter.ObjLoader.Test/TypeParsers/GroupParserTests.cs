@@ -10,14 +10,14 @@ namespace ObjLoader.Test.TypeParsers
     public class GroupParserTests
     {
         private GroupDataStoreMock _groupDataStoreMock;
-        private GroupParser _groupParser;
+        private GroupNameParser _groupParser;
 
         [SetUp]
         public void SetUp()
         {
             _groupDataStoreMock = new GroupDataStoreMock();
 
-            _groupParser = new GroupParser(_groupDataStoreMock);
+            _groupParser = new GroupNameParser(_groupDataStoreMock);
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace ObjLoader.Test.TypeParsers
         }
     }
 
-    class GroupDataStoreMock : IGroupDataStore
+    class GroupDataStoreMock : IGroupNameDataStore
     {
         public string ParsedGroupName { get; set; }
         

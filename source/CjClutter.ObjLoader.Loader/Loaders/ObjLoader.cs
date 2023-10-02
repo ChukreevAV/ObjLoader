@@ -13,14 +13,15 @@ namespace ObjLoader.Loader.Loaders
         private readonly List<string> _unrecognizedLines = new List<string>();
 
         public ObjLoader(
-            IDataStore dataStore, 
+            IDataStore dataStore,
             IFaceParser faceParser, 
-            IGroupParser groupParser,
             INormalParser normalParser, 
             ITextureParser textureParser, 
             IVertexParser vertexParser,
-            IMaterialLibraryParser materialLibraryParser, 
-            IUseMaterialParser useMaterialParser)
+            IMtlLibParser mtlLibParser,
+            IGroupNameParser groupNameParser,
+            IMaterialNameParser materialNameParser,
+            IObjectNameParser objectNameParser)
         {
             _dataStore = dataStore;
             SetupTypeParsers(
@@ -28,9 +29,10 @@ namespace ObjLoader.Loader.Loaders
                 faceParser,
                 normalParser,
                 textureParser,
-                groupParser,
-                materialLibraryParser,
-                useMaterialParser);
+                groupNameParser,
+                mtlLibParser,
+                materialNameParser,
+                objectNameParser);
         }
 
         private void SetupTypeParsers(params ITypeParser[] parsers)
@@ -55,7 +57,7 @@ namespace ObjLoader.Loader.Loaders
             _unrecognizedLines.Add(keyword + " " + data);
         }
 
-        public LoadResult Load(Stream lineStream)
+        public LoadResult Load(StreamReader lineStream)
         {
             StartLoad(lineStream);
 
@@ -70,7 +72,7 @@ namespace ObjLoader.Loader.Loaders
                                  Textures = _dataStore.Textures,
                                  Normals = _dataStore.Normals,
                                  Groups = _dataStore.Groups,
-                                 Materials = _dataStore.Materials
+                                 Mtllibs = _dataStore.MtlLibs
                              };
             return result;
         }

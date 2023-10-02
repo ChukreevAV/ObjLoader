@@ -13,18 +13,18 @@ namespace ObjLoader.Test.Loaders
     [TestFixture]
     public class MaterialLibraryLoaderTests
     {
-        private MaterialLibrarySpy _materialLibrarySpy;
+        private LoadResultMtl _resultMtl;
         private Material _firstMaterial;
         private Material _secondMaterial;
         private const float Epsilon = 0.000001f;
         
-        private MaterialLibraryLoader _materialLibraryLoader;
+        private IMtlLoader _mtlLoader;
 
         [SetUp]
         public void SetUp()
         {
-            _materialLibrarySpy = new MaterialLibrarySpy();
-            _materialLibraryLoader = new MaterialLibraryLoader(_materialLibrarySpy);
+            MtlLoaderFactory mtlLoaderFactory = new MtlLoaderFactory();  
+            _mtlLoader = mtlLoaderFactory.Create();
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace ObjLoader.Test.Loaders
         {
             LoadMaterial();
             
-            _materialLibrarySpy.Materials.Count().Should().Be(2);
+            _resultMtl.Materials.Count().Should().Be(2);
             _firstMaterial.Name.Should().BeEquivalentTo("wire_134110008");
             _secondMaterial.Name.Should().BeEquivalentTo("second_material");
         }
@@ -74,7 +74,15 @@ namespace ObjLoader.Test.Loaders
         {
             LoadMaterial();
 
-            _firstMaterial.Transparency.Should().BeApproximately(0.5f, Epsilon);
+            _firstMaterial.Transparency.Should().BeApproximately(0.9f, Epsilon);
+        }
+
+        [Test]
+        public void Sets_correct_transparencyTr()
+        {
+            LoadMaterial();
+
+            _firstMaterial.TransparencyTr.Should().BeApproximately(0.5f, Epsilon);
         }
 
         [Test]
@@ -103,17 +111,20 @@ namespace ObjLoader.Test.Loaders
         private void LoadMaterial()
         {
             var data = Encoding.ASCII.GetBytes(MaterialLibrary);
-            var materialStream = new MemoryStream(data);
+            var memoryStream = new MemoryStream(data);
+            StreamReader materialStream = new StreamReader(memoryStream);
 
-            _materialLibraryLoader.Load(materialStream);
-            _firstMaterial = _materialLibrarySpy.Materials.First();
-            _secondMaterial = _materialLibrarySpy.Materials.ElementAt(1);
+             var _result = _mtlLoader.Load(materialStream);
+            _resultMtl = _result;
+            _firstMaterial = _result.Materials.First();
+            _secondMaterial = _result.Materials.ElementAt(1);
         }
 
         private const string MaterialLibrary = 
     "newmtl wire_134110008\r\n" +
 "\tNs\t32\r\n" +
 @"Tr 0.5
+d 0.9
 illum 2
 Ka 1.0000 2.0000 3.0000
 Kd 0.5255 0.4314 0.0314
@@ -128,19 +139,6 @@ disp lenna_disp.tga
 decal lenna_stencil.tga
 newmtl second_material";
 
-        private class MaterialLibrarySpy : IMaterialLibrary
-        {
-            public List<Material> Materials { get; private set; }
-
-            public MaterialLibrarySpy()
-            {
-                Materials = new List<Material>();
-            }
-
-            public void Push(Material material)
-            {
-                Materials.Add(material);
-            }
-        }
+    
     }
 }

@@ -1,6 +1,6 @@
 namespace ObjLoader.Loader.Data.DataStore
 {
-    public interface IMaterialLibrary
+    public interface IMaterialDataStore
     {
         void Push(Material material);
     }

@@ -24,10 +24,10 @@ namespace ObjLoader.Loader.TypeParsers
         {
             string[] parts = line.Split(' ');
 
-            float x = parts[0].ParseInvariantFloat();
-            float y = parts[1].ParseInvariantFloat();
+            float u = parts[0].ParseInvariantFloat();
+            float v = parts[1].ParseInvariantFloat();
 
-            var texture = new Texture(x, y);
+            var texture = new Texture(u, v);
             _textureDataStore.AddTexture(texture);
         }
     }

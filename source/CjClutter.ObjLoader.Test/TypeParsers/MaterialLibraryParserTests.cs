@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
+﻿using ObjLoader.Loader.Data.DataStore;
+using FluentAssertions;
 using NUnit.Framework;
-using ObjLoader.Loader.Loaders;
 using ObjLoader.Loader.TypeParsers;
 
 namespace ObjLoader.Test.TypeParsers
@@ -9,13 +9,13 @@ namespace ObjLoader.Test.TypeParsers
     public class MaterialLibraryParserTests
     {
         private MaterialLibraryLoaderFacadeSpy _materialLibraryLoaderFacadeSpy;
-        private MaterialLibraryParser _parser;
+        private MtlLibParser _parser;
 
         [SetUp]
         public void SetUp()
         {
             _materialLibraryLoaderFacadeSpy = new MaterialLibraryLoaderFacadeSpy();
-            _parser = new MaterialLibraryParser(_materialLibraryLoaderFacadeSpy);
+            _parser = new MtlLibParser(_materialLibraryLoaderFacadeSpy);
         }
 
         [Test]
@@ -45,13 +45,13 @@ namespace ObjLoader.Test.TypeParsers
             _materialLibraryLoaderFacadeSpy.RequestedLoadFileName.Should().BeEquivalentTo("cube.mtl");
         }
 
-        private class MaterialLibraryLoaderFacadeSpy : IMaterialLibraryLoaderFacade
+        private class MaterialLibraryLoaderFacadeSpy : IMtlLibDataStore
         {
             public string RequestedLoadFileName { get; set; }
-            
-            public void Load(string materialFileName)
+
+            public void AddMtlLib(string mtlLib)
             {
-                RequestedLoadFileName = materialFileName;
+                RequestedLoadFileName = mtlLib;
             }
         }
     }

@@ -2,13 +2,13 @@ namespace ObjLoader.Loader.Data.VertexData
 {
     public struct Texture
     {
-        public Texture(float x, float y) : this()
+        public Texture(float u, float v) : this()
         {
-            X = x;
-            Y = y;
+            U = u;
+            V = v;
         }
 
-        public float X { get; private set; }
-        public float Y { get; private set; }
+        public float U { get; private set; }
+        public float V { get; private set; }
     }
 }

@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using ObjLoader.Loader.TypeParsers.Interfaces;
 using ObjLoader.Loader.Common;
 using ObjLoader.Loader.Data;
 using ObjLoader.Loader.Data.DataStore;
 
 namespace ObjLoader.Loader.Loaders
 {
-    public class MaterialLibraryLoader : LoaderBase, IMaterialLibraryLoader
+    public class MtlLoader : LoaderBase, IMtlLoader
     {
-        private readonly IMaterialLibrary _materialLibrary;
+        private readonly IMaterialParser _materialLibrary;
+        private readonly IDataStoreMtl _dataStore;
         private Material _currentMaterial;
 
         private readonly Dictionary<string, Action<string>> _parseActionDictionary = new Dictionary<string, Action<string>>();
         private readonly List<string> _unrecognizedLines = new List<string>();
 
-        public MaterialLibraryLoader(IMaterialLibrary materialLibrary)
+        public MtlLoader(IDataStoreMtl dataStoreMtl, IMaterialParser materialLibrary)
         {
+            _dataStore = dataStoreMtl;
             _materialLibrary = materialLibrary;
 
             AddParseAction("newmtl", PushMaterial);
@@ -26,7 +29,7 @@ namespace ObjLoader.Loader.Loaders
             AddParseAction("Ns", d => CurrentMaterial.SpecularCoefficient = d.ParseInvariantFloat());
 
             AddParseAction("d", d => CurrentMaterial.Transparency = d.ParseInvariantFloat());
-            AddParseAction("Tr", d => CurrentMaterial.Transparency = d.ParseInvariantFloat());
+            AddParseAction("Tr", d => CurrentMaterial.TransparencyTr = d.ParseInvariantFloat());
 
             AddParseAction("illum", i => CurrentMaterial.IlluminationModel = i.ParseInvariantInt());
 
@@ -77,7 +80,7 @@ namespace ObjLoader.Loader.Loaders
         private void PushMaterial(string materialName)
         {
             _currentMaterial = new Material(materialName);
-            _materialLibrary.Push(_currentMaterial);
+            _materialLibrary.AddMaterial(_currentMaterial);
         }
 
         private Vec3 ParseVec3(string data)
@@ -91,9 +94,20 @@ namespace ObjLoader.Loader.Loaders
             return new Vec3(x, y, z);
         }
 
-        public void Load(Stream lineStream)
+        public LoadResultMtl Load(StreamReader lineStream)
         {
             StartLoad(lineStream);
+
+            return CreateResult();
+        }
+
+        private LoadResultMtl CreateResult()
+        {
+            var result = new LoadResultMtl
+            {
+                Materials = _dataStore.Materials
+            };
+            return result;
         }
     }
 }

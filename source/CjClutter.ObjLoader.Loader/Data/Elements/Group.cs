@@ -7,13 +7,16 @@ namespace ObjLoader.Loader.Data.Elements
     {
         private readonly List<Face> _faces = new List<Face>();
         
-        public Group(string name)
+        public Group(string groupName, string materialName, string objectName)
         {
-            Name = name;
+            GroupName = groupName;
+            MaterialName = materialName;
+            ObjectName = objectName;
         }
 
-        public string Name { get; private set; }
-        public Material Material { get; set; }
+        public string GroupName { get; private set; }
+        public string MaterialName { get; private set; }
+        public string ObjectName { get; private set; }
 
         public IList<Face> Faces { get { return _faces; } }
 

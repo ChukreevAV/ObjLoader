@@ -6,9 +6,9 @@ namespace ObjLoader.Loader.Loaders
     {
         private StreamReader _lineStreamReader;
 
-        protected void StartLoad(Stream lineStream)
+        protected void StartLoad(StreamReader lineStream)
         {
-            _lineStreamReader = new StreamReader(lineStream);
+            _lineStreamReader = lineStream;
 
             while (!_lineStreamReader.EndOfStream)
             {

@@ -12,52 +12,50 @@ namespace ObjLoader.Test.Loaders
     [TestFixture]
     public class ObjLoaderTests
     {
-        private class MaterialStreamProviderSpy : IMaterialStreamProvider
-        {
-            public string RequestedMaterialFilePath { get; private set; }
-            public Stream StreamToReturn { get; set; }
-
-            public Stream Open(string materialFilePath)
-            {
-                RequestedMaterialFilePath = materialFilePath;
-                return StreamToReturn;
-            }
-        }
 
         private Loader.Loaders.ObjLoader _loader;
+        private Loader.Loaders.MtlLoader _loaderMtl;
 
         private LoadResult _loadResult;
-        private DataStore _textureDataStore;
+        private LoadResultMtl _loadResultMtl;
+        private DataStore _OBJDataStore;
+        private DataStoreMtl _MTLDataStore;
+
         private FaceParser _faceParser;
-        private GroupParser _groupParser;
+
         private NormalParser _normalParser;
         private TextureParser _textureParser;
         private VertexParser _vertexParser;
-        private MaterialLibraryLoader _materialLibraryLoader;
-        private MaterialLibraryParser _materialLibraryParser;
-        private UseMaterialParser _useMaterialParser;
-        private MaterialLibraryLoaderFacade _materialLibraryLoaderFacade;
-        private MaterialStreamProviderSpy _materialStreamProviderSpy;
+        private MtlLibParser _mtlLibParser;
+        private GroupNameParser _groupNameParser;
+        private MaterialNameParser _materialnameParser;
+        private ObjectNameParser _objectNameParser;
+
+        private MaterialParser _materialParser;
 
         [SetUp]
         public void SetUp()
         {
-            _textureDataStore = new DataStore();
+            _OBJDataStore = new DataStore();
 
-            _faceParser = new FaceParser(_textureDataStore);
-            _groupParser = new GroupParser(_textureDataStore);
-            _normalParser = new NormalParser(_textureDataStore);
-            _textureParser = new TextureParser(_textureDataStore);
-            _vertexParser = new VertexParser(_textureDataStore);
-            _materialStreamProviderSpy = new MaterialStreamProviderSpy();
-            _materialStreamProviderSpy.StreamToReturn = CreateMemoryStreamFromString(MaterialLibraryString);
+            _MTLDataStore = new DataStoreMtl();
 
-            _materialLibraryLoader = new MaterialLibraryLoader(_textureDataStore);
-            _materialLibraryLoaderFacade = new MaterialLibraryLoaderFacade(_materialLibraryLoader, _materialStreamProviderSpy);
-            _materialLibraryParser = new MaterialLibraryParser(_materialLibraryLoaderFacade);
-            _useMaterialParser = new UseMaterialParser(_textureDataStore);
+            _faceParser = new FaceParser(_OBJDataStore);
+           
+            _normalParser = new NormalParser(_OBJDataStore);
+            _textureParser = new TextureParser(_OBJDataStore);
+            _vertexParser = new VertexParser(_OBJDataStore);
 
-            _loader = new Loader.Loaders.ObjLoader(_textureDataStore, _faceParser, _groupParser, _normalParser, _textureParser, _vertexParser, _materialLibraryParser, _useMaterialParser);
+            _groupNameParser = new GroupNameParser(_OBJDataStore);
+            _objectNameParser = new ObjectNameParser(_OBJDataStore);
+            _materialnameParser = new MaterialNameParser(_OBJDataStore);
+            _mtlLibParser = new MtlLibParser(_OBJDataStore);
+
+            _materialParser = new MaterialParser(_MTLDataStore);
+
+            _loader = new Loader.Loaders.ObjLoader(_OBJDataStore, _faceParser, _normalParser, _textureParser, _vertexParser, _mtlLibParser, _groupNameParser, _materialnameParser, _objectNameParser);
+
+            _loaderMtl = new MtlLoader(_MTLDataStore, _materialParser);
         }
 
         [Test]
@@ -68,45 +66,46 @@ namespace ObjLoader.Test.Loaders
             _loadResult.Vertices.Should().HaveCount(8);
             _loadResult.Textures.Should().HaveCount(14);
             _loadResult.Normals.Should().HaveCount(8);
-            _loadResult.Materials.Should().HaveCount(1);
+            _loadResultMtl.Materials.Should().HaveCount(1);
 
-            _materialStreamProviderSpy.RequestedMaterialFilePath.Should().BeEquivalentTo("cube.mtl");
+            _loadResult.Mtllibs.Should().HaveCount(1);
+            var mtllib = _loadResult.Mtllibs.First();
+            mtllib.Should().BeEquivalentTo("cube.mtl");
 
             _loadResult.Groups.Should().HaveCount(1);
 
             var group = _loadResult.Groups.First();
             group.Faces.Should().HaveCount(12);
-            group.Material.Name.Should().BeEquivalentTo("cube_material");
+            group.MaterialName.Should().BeEquivalentTo("cube_material");          
         }
 
         [Test]
         public void Loads_object_correctly_when_material_is_not_found()
         {
-            _materialStreamProviderSpy.StreamToReturn = null;
-            var materialLibraryLoaderFacade = new MaterialLibraryLoaderFacade(_materialLibraryLoader, _materialStreamProviderSpy);
-            var materialLibraryParser = new MaterialLibraryParser(materialLibraryLoaderFacade);
-
-            _loader = new Loader.Loaders.ObjLoader(_textureDataStore, _faceParser, _groupParser, _normalParser, _textureParser, _vertexParser, materialLibraryParser, _useMaterialParser);
-
             Load();
 
             _loadResult.Vertices.Should().HaveCount(8);
             _loadResult.Textures.Should().HaveCount(14);
             _loadResult.Normals.Should().HaveCount(8);
-            _loadResult.Materials.Should().HaveCount(0);
 
             _loadResult.Groups.Should().HaveCount(1);
 
             var group = _loadResult.Groups.First();
             group.Faces.Should().HaveCount(12);
-            group.Material.Should().BeNull();
+            group.MaterialName.Should().BeEquivalentTo("cube_material");
         }
 
         private void Load()
         {
-            var objectStream = CreateMemoryStreamFromString(ObjectFileString);
+            StreamReader objectStream = new StreamReader(CreateMemoryStreamFromString(ObjectFileString));
 
             _loadResult = _loader.Load(objectStream);
+
+            StreamReader mtlStream = new StreamReader(CreateMemoryStreamFromString(MaterialLibraryString));
+
+            _loadResultMtl = _loaderMtl.Load(mtlStream);
+
+
         }
 
         private Stream CreateMemoryStreamFromString(string str)

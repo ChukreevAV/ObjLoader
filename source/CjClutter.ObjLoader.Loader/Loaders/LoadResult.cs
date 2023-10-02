@@ -11,6 +11,11 @@ namespace ObjLoader.Loader.Loaders
         public IList<Texture> Textures { get; set; }
         public IList<Normal> Normals { get; set; }
         public IList<Group> Groups { get; set; }
+        public IList<string> Mtllibs { get; set; }
+    }
+
+    public class LoadResultMtl 
+    {
         public IList<Material> Materials { get; set; }
     }
 }

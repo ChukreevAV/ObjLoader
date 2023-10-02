@@ -1,6 +1,6 @@
 namespace ObjLoader.Loader.TypeParsers.Interfaces
 {
-    public interface IMaterialLibraryParser : ITypeParser
+    public interface IMaterialNameParser : ITypeParser
     {
     }
 }

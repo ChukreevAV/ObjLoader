@@ -4,13 +4,13 @@ using ObjLoader.Loader.TypeParsers.Interfaces;
 
 namespace ObjLoader.Loader.TypeParsers
 {
-    public class UseMaterialParser : TypeParserBase, IUseMaterialParser
+    public class MaterialNameParser : TypeParserBase, IMaterialNameParser
     {
-        private readonly IElementGroup _elementGroup;
+        private readonly IMaterialNameDataStore _materialNameDataStore;
 
-        public UseMaterialParser(IElementGroup elementGroup)
+        public MaterialNameParser(IMaterialNameDataStore materialNameDataStore)
         {
-            _elementGroup = elementGroup;
+            _materialNameDataStore = materialNameDataStore;
         }
 
         protected override string Keyword
@@ -20,7 +20,7 @@ namespace ObjLoader.Loader.TypeParsers
 
         public override void Parse(string line)
         {
-            _elementGroup.SetMaterial(line);
+            _materialNameDataStore.PushMaterial(line);
         }
     }
 }

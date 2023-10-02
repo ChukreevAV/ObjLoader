@@ -4,13 +4,13 @@ using ObjLoader.Loader.TypeParsers.Interfaces;
 
 namespace ObjLoader.Loader.TypeParsers
 {
-    public class GroupParser : TypeParserBase, IGroupParser
+    public class GroupNameParser : TypeParserBase, IGroupNameParser
     {
-        private readonly IGroupDataStore _groupDataStore;
+        private readonly IGroupNameDataStore _groupNameDataStore;
 
-        public GroupParser(IGroupDataStore groupDataStore)
+        public GroupNameParser(IGroupNameDataStore groupNameDataStore)
         {
-            _groupDataStore = groupDataStore;
+            _groupNameDataStore = groupNameDataStore;
         }
 
         protected override string Keyword
@@ -20,7 +20,7 @@ namespace ObjLoader.Loader.TypeParsers
 
         public override void Parse(string line)
         {
-            _groupDataStore.PushGroup(line);
+            _groupNameDataStore.PushGroup(line);
         }
     }
 }

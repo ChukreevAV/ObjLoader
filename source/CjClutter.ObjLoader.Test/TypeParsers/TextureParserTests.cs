@@ -46,8 +46,8 @@ namespace ObjLoader.Test.TypeParsers
             _textureParser.Parse(textureLine);
 
             var parsedNormal = _textureDataStoreMock.ParsedTexture;
-            parsedNormal.X.Should().BeApproximately(0.5f, 0.000001f);
-            parsedNormal.Y.Should().BeApproximately(-1.352f, 0.000001f);
+            parsedNormal.U.Should().BeApproximately(0.5f, 0.000001f);
+            parsedNormal.V.Should().BeApproximately(-1.352f, 0.000001f);
         }
 
         class TextureDataStoreMock : ITextureDataStore

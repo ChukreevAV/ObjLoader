@@ -1,7 +1,15 @@
-ObjLoader [![Build status](https://ci.appveyor.com/api/projects/status/5dbqtlt7gxninwyn?svg=true)](https://ci.appveyor.com/project/ChrisJansson/objloader)[![NuGet version](https://badge.fury.io/nu/CjClutter.ObjLoader.svg)](https://badge.fury.io/nu/CjClutter.ObjLoader)
+ObjLoader
 ========
 
 Objloader is a simple Wavefront .obj and .mtl loader
+
+Changes
+-------
+Agora os arquivos .obj e .mtl são independentes, cada um tem uma classe de carregamento(load) e de resultado (loadResult).
+<br>Agora os grupos são criados considerando as tags "o" "g" "usemtl", quando cada uma aparecer será gerado um novo grupo, mantendo o contudo das outras tags.
+<br> Agora os vértices suportam atributos de cores.
+<br> Data da Versão: 2023-10-02
+
 
 Installation 
 ------------
@@ -9,22 +17,23 @@ Build the project and reference the .dll or reference the project directly as us
 
 Loading a model
 ---------------
-Either create the loader with the standard material stream provider, this will open the file read-only from the working directory.
+Loading a .obj file:
 
-	var objLoaderFactory = new ObjLoaderFactory();
-	var objLoader = objLoaderFactory.Create();
+	var loaderFactory = new ObjLoader.Loader.Loaders.ObjLoaderFactory();
+    var objLoader = loaderFactory.Create();
+    var fileStream = new FileInfo("file.obj").OpenRead();
+    StreamReader streamReader = new StreamReader(fileStream, Encoding.ASCII);
+    var objResult = objLoader.Load(streamReader);
 
     
-Or provide your own:
+Loading a .mtl file:
 
-    //With the signature Func<string, Stream>
-    var objLoaderFactory = new ObjLoaderFactory();
-    var objLoader = objLoaderFactory.Create(materialFileName => File.Open(materialFileName);
+    var mtlLoaderFactory = new ObjLoader.Loader.Loaders.MtlLoaderFactory();
+    var mtlLoader = mtlLoaderFactory.Create();
+    var fileStreamMtl = new FileInfo("file.mtl").OpenRead();
+    StreamReader streamReaderMtl = new StreamReader(fileStreamMtl, Encoding.ASCII);
+    var mtlResult = mtlLoader.Load(streamReaderMtl);
 
-Then it is just a matter of invoking the loader with a stream containing the model. 
-
-    var fileStream = new FileStream("model.obj");
-    var result = objLoader.Load(fileStream);
 
 The result object contains the loaded model in this form:
 	
@@ -34,5 +43,10 @@ The result object contains the loaded model in this form:
         public IList<Texture> Textures { get; set; }
         public IList<Normal> Normals { get; set; }
         public IList<Group> Groups { get; set; }
+        public IList<string> Mtllibs { get; set; }
+    }
+
+    public class LoadResultMtl 
+    {
         public IList<Material> Materials { get; set; }
     }

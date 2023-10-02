@@ -6,17 +6,20 @@ using ObjLoader.Loader.Data.VertexData;
 
 namespace ObjLoader.Loader.Data.DataStore
 {
-    public class DataStore : IDataStore, IGroupDataStore, IVertexDataStore, ITextureDataStore, INormalDataStore,
-                             IFaceGroup, IMaterialLibrary, IElementGroup
+    public class DataStore : IDataStore, IFaceGroup, IVertexDataStore, ITextureDataStore, INormalDataStore, IMtlLibDataStore,
+                             IGroupNameDataStore, IMaterialNameDataStore, IObjectNameDataStore
     {
+        private string _lastGroupName = "default";
+        private string _lastMaterialName = "default";
+        private string _lastObjectName = "default";
+
         private Group _currentGroup;
 
         private readonly List<Group> _groups = new List<Group>();
-        private readonly List<Material> _materials = new List<Material>();
-
         private readonly List<Vertex> _vertices = new List<Vertex>();
         private readonly List<Texture> _textures = new List<Texture>();
         private readonly List<Normal> _normals = new List<Normal>();
+        private readonly List<string> _mtlLibs = new List<string>();
 
         public IList<Vertex> Vertices
         {
@@ -33,14 +36,14 @@ namespace ObjLoader.Loader.Data.DataStore
             get { return _normals; }
         }
 
-        public IList<Material> Materials
-        {
-            get { return _materials; }
-        }
-
         public IList<Group> Groups
         {
-            get { return _groups; }
+            get { return _groups.FindAll(g => g.Faces.Count != 0); }
+        }
+
+        public IList<string> MtlLibs
+        {
+            get { return _mtlLibs; }
         }
 
         public void AddFace(Face face)
@@ -50,19 +53,36 @@ namespace ObjLoader.Loader.Data.DataStore
             _currentGroup.AddFace(face);
         }
 
-        public void PushGroup(string groupName)
-        {
-            _currentGroup = new Group(groupName);
-            _groups.Add(_currentGroup);
-        }
-
         private void PushGroupIfNeeded()
         {
             if (_currentGroup == null)
             {
-                PushGroup("default");
+                _currentGroup = new Group("default", "default", "default");
+                _groups.Add(_currentGroup);
             }
         }
+
+        public void PushGroup(string groupName)
+        {
+            _lastGroupName = groupName;
+            _currentGroup = new Group(groupName, _lastMaterialName, _lastObjectName);
+            _groups.Add(_currentGroup);
+        }
+
+        public void PushMaterial(string materialName)
+        {
+            _lastMaterialName = materialName;
+            _currentGroup = new Group(_lastGroupName, materialName, _lastObjectName);
+            _groups.Add(_currentGroup);
+        }
+
+        public void PushObject(string objectName)
+        {
+            _lastObjectName = objectName;
+            _currentGroup = new Group(_lastGroupName, _lastMaterialName, objectName);
+            _groups.Add(_currentGroup);
+        }
+
 
         public void AddVertex(Vertex vertex)
         {
@@ -79,16 +99,26 @@ namespace ObjLoader.Loader.Data.DataStore
             _normals.Add(normal);
         }
 
+        public void AddMtlLib(string mtlLib)
+        {
+           _mtlLibs.Add(mtlLib);
+        }
+    }
+
+
+    public class DataStoreMtl : IDataStoreMtl, IMaterialDataStore
+    {
+        private readonly List<Material> _materials = new List<Material>();
+
+        public IList<Material> Materials
+        {
+            get { return _materials; }
+        }
+
         public void Push(Material material)
         {
             _materials.Add(material);
         }
-
-        public void SetMaterial(string materialName)
-        {
-            var material = _materials.SingleOrDefault(x => x.Name.EqualsOrdinalIgnoreCase(materialName));
-            PushGroupIfNeeded();
-            _currentGroup.Material = material;
-        }
     }
+
 }
