@@ -163,9 +163,45 @@ v 39 42 45 48 51 54 57
         }
 
 
+        private string file4 =
+@"#coment
+g group1
+l 4 5 6
+l 7 8 9 10 11
+g group2
+l 10 11 12 13
+";
+        [Test]
+        public void TestLines()
+        {
+            var _loadResult = _loader.Load(CreateStreamReaderFromString(file4));
 
 
-            private StreamReader CreateStreamReaderFromString(string str)
+            Assert.IsTrue(_loadResult.Groups.Count == 2);
+            Assert.IsTrue(_loadResult.Groups[0].Lines[0][0] == 4);
+            Assert.IsTrue(_loadResult.Groups[0].Lines[0][1] == 5);
+            Assert.IsTrue(_loadResult.Groups[0].Lines[0][2] == 6);
+            
+            Assert.IsTrue(_loadResult.Groups[0].Lines[1][0] == 7);
+            Assert.IsTrue(_loadResult.Groups[0].Lines[1][1] == 8);
+            Assert.IsTrue(_loadResult.Groups[0].Lines[1][2] == 9);
+            Assert.IsTrue(_loadResult.Groups[0].Lines[1][3] == 10);
+            Assert.IsTrue(_loadResult.Groups[0].Lines[1][4] == 11);
+
+            Assert.IsTrue(_loadResult.Groups[1].Lines[0][0] == 10);
+            Assert.IsTrue(_loadResult.Groups[1].Lines[0][1] == 11);
+            Assert.IsTrue(_loadResult.Groups[1].Lines[0][2] == 12);
+            Assert.IsTrue(_loadResult.Groups[1].Lines[0][3] == 13);
+
+        }
+
+
+
+
+
+
+
+        private StreamReader CreateStreamReaderFromString(string str)
         {
             var data = Encoding.ASCII.GetBytes(str);
             return new StreamReader(new MemoryStream(data));

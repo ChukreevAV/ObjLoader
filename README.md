@@ -8,7 +8,8 @@ Changes
 Agora os arquivos .obj e .mtl são independentes, cada um tem uma classe de carregamento(load) e de resultado (loadResult).
 <br>Agora os grupos são criados considerando as tags "o" "g" "usemtl", quando cada uma aparecer será gerado um novo grupo, mantendo o contudo das outras tags.
 <br> Agora os vértices suportam atributos de cores.
-<br> Data da Versão: 2023-10-02
+<br> Adicionado suporte para linhas.
+<br> Data da Versão: 2023-10-12
 
 
 Installation 

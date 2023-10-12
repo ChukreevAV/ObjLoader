@@ -22,6 +22,7 @@ namespace ObjLoader.Test.Loaders
         private DataStoreMtl _MTLDataStore;
 
         private FaceParser _faceParser;
+        private LineParser _lineParser;
 
         private NormalParser _normalParser;
         private TextureParser _textureParser;
@@ -41,6 +42,7 @@ namespace ObjLoader.Test.Loaders
             _MTLDataStore = new DataStoreMtl();
 
             _faceParser = new FaceParser(_OBJDataStore);
+            _lineParser = new LineParser(_OBJDataStore);
            
             _normalParser = new NormalParser(_OBJDataStore);
             _textureParser = new TextureParser(_OBJDataStore);
@@ -53,7 +55,7 @@ namespace ObjLoader.Test.Loaders
 
             _materialParser = new MaterialParser(_MTLDataStore);
 
-            _loader = new Loader.Loaders.ObjLoader(_OBJDataStore, _faceParser, _normalParser, _textureParser, _vertexParser, _mtlLibParser, _groupNameParser, _materialnameParser, _objectNameParser);
+            _loader = new Loader.Loaders.ObjLoader(_OBJDataStore, _faceParser, _lineParser, _normalParser, _textureParser, _vertexParser, _mtlLibParser, _groupNameParser, _materialnameParser, _objectNameParser);
 
             _loaderMtl = new MtlLoader(_MTLDataStore, _materialParser);
         }
