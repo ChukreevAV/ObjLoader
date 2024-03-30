@@ -20,4 +20,6 @@
     <PackageTags>obj wavefront 3d</PackageTags>
     <Title>CjClutter.ObjLoader</Title>
   </PropertyGroup>
+
+  <Import Project="..\CjClutter.ObjLoader.Loader\CjClutter.ObjLoader.Loader.projitems" Label="Shared" />
 </Project>

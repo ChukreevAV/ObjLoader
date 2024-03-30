@@ -5,9 +5,12 @@ Objloader is a simple Wavefront .obj and .mtl loader
 
 Changes
 -------
+Agora, ao ter as tags "o", "g", "usemtl" sem conteúdo, não será mais lançado uma exception.
+<br> Data da Versão: 2024-03-30
+
 Agora os arquivos .obj e .mtl são independentes, cada um tem uma classe de carregamento(load) e de resultado (loadResult).
-<br>Agora os grupos são criados considerando as tags "o" "g" "usemtl", quando cada uma aparecer será gerado um novo grupo, mantendo o contudo das outras tags.
-<br> Agora os vértices suportam atributos de cores.
+<br>Agora, os grupos são criados considerando as tags "o" "g" "usemtl", quando cada uma aparecer, será gerado um novo grupo, mantendo o contudo das outras tags.
+<br> Agora, os vértices suportam atributos de cores.
 <br> Adicionado suporte para linhas.
 <br> Data da Versão: 2023-10-12
 

@@ -196,8 +196,53 @@ l 10 11 12 13
         }
 
 
+        private string file5 =
+@"o obj1
+g group1
+usemtl material1
+";
+        [Test]
+        public void TestGroupsNoFaces()
+        {
+            var _loadResult = _loader.Load(CreateStreamReaderFromString(file5));
+
+            Assert.IsTrue(_loadResult.Groups.Count == 0);
+        }
+
+        private string file6 =
+@"o obj1
+g group1
+usemtl material1
+f 1 2 3
+";
+        [Test]
+        public void TestGroupsOneFace()
+        {
+            var _loadResult = _loader.Load(CreateStreamReaderFromString(file6));
+
+            Assert.IsTrue(_loadResult.Groups.Count == 1);
+            Assert.IsTrue(_loadResult.Groups[0].ObjectName == "obj1");
+            Assert.IsTrue(_loadResult.Groups[0].GroupName == "group1");
+            Assert.IsTrue(_loadResult.Groups[0].MaterialName == "material1");
+        }
 
 
+        private string file7 =
+@"o 
+g 
+usemtl 
+f 1 2 3
+";
+        [Test]
+        public void TestGroupsNoName()
+        {
+            var _loadResult = _loader.Load(CreateStreamReaderFromString(file7));
+
+            Assert.IsTrue(_loadResult.Groups.Count == 1);
+            Assert.IsTrue(_loadResult.Groups[0].ObjectName == "");
+            Assert.IsTrue(_loadResult.Groups[0].GroupName == "");
+            Assert.IsTrue(_loadResult.Groups[0].MaterialName == "");
+        }
 
 
 
