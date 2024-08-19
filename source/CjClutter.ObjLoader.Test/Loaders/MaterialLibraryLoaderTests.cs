@@ -1,11 +1,12 @@
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using NUnit.Framework;
-using ObjLoader.Loader.Data;
 using System.Linq;
+using System.Text;
+
 using FluentAssertions;
-using ObjLoader.Loader.Data.DataStore;
+
+using NUnit.Framework;
+
+using ObjLoader.Loader.Data;
 using ObjLoader.Loader.Loaders;
 
 namespace ObjLoader.Test.Loaders
@@ -23,7 +24,7 @@ namespace ObjLoader.Test.Loaders
         [SetUp]
         public void SetUp()
         {
-            MtlLoaderFactory mtlLoaderFactory = new MtlLoaderFactory();  
+            var mtlLoaderFactory = new MtlLoaderFactory();  
             _mtlLoader = mtlLoaderFactory.Create();
         }
 
@@ -112,7 +113,7 @@ namespace ObjLoader.Test.Loaders
         {
             var data = Encoding.ASCII.GetBytes(MaterialLibrary);
             var memoryStream = new MemoryStream(data);
-            StreamReader materialStream = new StreamReader(memoryStream);
+            var materialStream = new StreamReader(memoryStream);
 
              var _result = _mtlLoader.Load(materialStream);
             _resultMtl = _result;
@@ -137,8 +138,6 @@ map_d lenna_alpha.tga
 map_bump lenna_bump.tga
 disp lenna_disp.tga
 decal lenna_stencil.tga
-newmtl second_material";
-
-    
+newmtl second_material";    
     }
 }

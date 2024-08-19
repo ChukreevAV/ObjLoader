@@ -1,6 +1,8 @@
-﻿using ObjLoader.Loader.Data.DataStore;
-using FluentAssertions;
+﻿using FluentAssertions;
+
 using NUnit.Framework;
+
+using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.TypeParsers;
 
 namespace ObjLoader.Test.TypeParsers

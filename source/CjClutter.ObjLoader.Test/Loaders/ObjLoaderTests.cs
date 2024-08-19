@@ -55,7 +55,18 @@ namespace ObjLoader.Test.Loaders
 
             _materialParser = new MaterialParser(_MTLDataStore);
 
-            _loader = new Loader.Loaders.ObjLoader(_OBJDataStore, _faceParser, _lineParser, _normalParser, _textureParser, _vertexParser, _mtlLibParser, _groupNameParser, _materialnameParser, _objectNameParser);
+            _loader = new Loader.Loaders.ObjLoader(
+                _OBJDataStore,
+                _faceParser,
+                _lineParser,
+                _normalParser,
+                _textureParser,
+                _vertexParser,
+                _mtlLibParser,
+                _groupNameParser,
+                _materialnameParser,
+                _objectNameParser
+                );
 
             _loaderMtl = new MtlLoader(_MTLDataStore, _materialParser);
         }

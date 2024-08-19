@@ -1,11 +1,9 @@
-﻿using NUnit.Framework;
-using ObjLoader.Loader.Loaders;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+
+using NUnit.Framework;
+
+using ObjLoader.Loader.Loaders;
 
 namespace ObjLoader.Test.Loaders
 {
@@ -18,7 +16,7 @@ namespace ObjLoader.Test.Loaders
         [SetUp]
         public void SetUp()
         {
-            ObjLoader.Loader.Loaders.ObjLoaderFactory loaderFactory = new ObjLoader.Loader.Loaders.ObjLoaderFactory();
+            var loaderFactory = new ObjLoaderFactory();
             _loader = loaderFactory.Create();
         }
 
@@ -243,8 +241,6 @@ f 1 2 3
             Assert.IsTrue(_loadResult.Groups[0].GroupName == "");
             Assert.IsTrue(_loadResult.Groups[0].MaterialName == "");
         }
-
-
 
         private StreamReader CreateStreamReaderFromString(string str)
         {

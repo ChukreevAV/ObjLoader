@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
+
 using NUnit.Framework;
-using ObjLoader.Loader.Data;
+
 using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.TypeParsers;
 
@@ -54,7 +55,6 @@ namespace ObjLoader.Test.TypeParsers
             {
                 MaterialName = materialName;
             }
-
         }
     }
 }
