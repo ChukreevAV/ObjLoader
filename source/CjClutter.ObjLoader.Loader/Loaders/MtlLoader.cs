@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using ObjLoader.Loader.TypeParsers.Interfaces;
+
 using ObjLoader.Loader.Common;
 using ObjLoader.Loader.Data;
 using ObjLoader.Loader.Data.DataStore;
+using ObjLoader.Loader.TypeParsers.Interfaces;
 
 namespace ObjLoader.Loader.Loaders
 {

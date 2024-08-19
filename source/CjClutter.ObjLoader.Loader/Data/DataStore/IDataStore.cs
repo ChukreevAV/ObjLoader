@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using ObjLoader.Loader.Data.Elements;
 using ObjLoader.Loader.Data.VertexData;
 
@@ -7,9 +8,13 @@ namespace ObjLoader.Loader.Data.DataStore
     public interface IDataStore 
     {
         IList<Vertex> Vertices { get; }
+
         IList<Texture> Textures { get; }
+
         IList<Normal> Normals { get; }
+
         IList<Group> Groups { get; }
+
         IList<string> MtlLibs { get; }
     }
 
@@ -17,5 +22,4 @@ namespace ObjLoader.Loader.Data.DataStore
     {
         IList<Material> Materials { get; }
     }
-
 }

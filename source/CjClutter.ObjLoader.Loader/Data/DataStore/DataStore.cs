@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using ObjLoader.Loader.Common;
+
 using ObjLoader.Loader.Data.Elements;
 using ObjLoader.Loader.Data.VertexData;
 
@@ -88,7 +87,6 @@ namespace ObjLoader.Loader.Data.DataStore
             _groups.Add(_currentGroup);
         }
 
-
         public void AddVertex(Vertex vertex)
         {
             _vertices.Add(vertex);
@@ -108,10 +106,7 @@ namespace ObjLoader.Loader.Data.DataStore
         {
            _mtlLibs.Add(mtlLib);
         }
-
-        
     }
-
 
     public class DataStoreMtl : IDataStoreMtl, IMaterialDataStore
     {
@@ -127,5 +122,4 @@ namespace ObjLoader.Loader.Data.DataStore
             _materials.Add(material);
         }
     }
-
 }

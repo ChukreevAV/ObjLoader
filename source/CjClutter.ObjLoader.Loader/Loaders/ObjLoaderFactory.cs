@@ -1,4 +1,3 @@
-using System.IO;
 using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.TypeParsers;
 
@@ -21,7 +20,18 @@ namespace ObjLoader.Loader.Loaders
             var materialNameParser = new MaterialNameParser(dataStore);
             var objectNameParser = new ObjectNameParser(dataStore);
 
-            return new ObjLoader(dataStore, faceParser, lineParser, normalParser, textureParser, vertexParser, mtlLibParser, groupNameParser, materialNameParser, objectNameParser);
+            return new ObjLoader(
+                dataStore,
+                faceParser,
+                lineParser,
+                normalParser,
+                textureParser,
+                vertexParser,
+                mtlLibParser,
+                groupNameParser,
+                materialNameParser,
+                objectNameParser
+                );
         }
     }
 }

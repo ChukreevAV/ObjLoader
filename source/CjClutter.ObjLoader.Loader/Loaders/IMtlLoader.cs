@@ -6,5 +6,4 @@ namespace ObjLoader.Loader.Loaders
     {
         LoadResultMtl Load(StreamReader lineStream);
     }
-
 }

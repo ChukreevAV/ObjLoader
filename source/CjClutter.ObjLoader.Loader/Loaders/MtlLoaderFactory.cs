@@ -1,10 +1,5 @@
-﻿using ObjLoader.Loader.Loaders;
-using ObjLoader.Loader.Data.DataStore;
+﻿using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.TypeParsers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace ObjLoader.Loader.Loaders
 {

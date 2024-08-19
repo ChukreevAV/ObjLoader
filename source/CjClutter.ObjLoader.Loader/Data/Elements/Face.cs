@@ -32,7 +32,9 @@ namespace ObjLoader.Loader.Data.Elements
         }
 
         public int VertexIndex { get; set; }
+
         public int TextureIndex { get; set; }
+
         public int NormalIndex { get; set; }
     }
 }

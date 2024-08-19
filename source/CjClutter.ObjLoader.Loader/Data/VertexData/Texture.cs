@@ -9,6 +9,7 @@ namespace ObjLoader.Loader.Data.VertexData
         }
 
         public float U { get; private set; }
+
         public float V { get; private set; }
     }
 }

@@ -27,13 +27,19 @@ namespace ObjLoader.Loader.Data.VertexData
         }
 
         public float X { get; private set; }
+
         public float Y { get; private set; }
+
         public float Z { get; private set; }
 
         public float W { get; private set; }
+
         public float R { get; private set; }
+
         public float G { get; private set; }
+
         public float B { get; private set; }
+
         public float A { get; private set; }
     }
 }

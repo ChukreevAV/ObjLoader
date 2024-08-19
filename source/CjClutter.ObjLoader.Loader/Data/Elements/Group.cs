@@ -17,7 +17,9 @@ namespace ObjLoader.Loader.Data.Elements
         }
 
         public string GroupName { get; private set; }
+
         public string MaterialName { get; private set; }
+
         public string ObjectName { get; private set; }
 
         public IList<Face> Faces { get { return _faces; } }
@@ -33,6 +35,5 @@ namespace ObjLoader.Loader.Data.Elements
         {
             _lines.Add(line);
         }
-
     }
 }
