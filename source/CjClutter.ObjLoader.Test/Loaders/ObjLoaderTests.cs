@@ -89,7 +89,7 @@ namespace ObjLoader.Test.Loaders
 
             var group = _loadResult.Groups.First();
             group.Faces.Should().HaveCount(12);
-            group.MaterialName.Should().BeEquivalentTo("cube_material");          
+            group.MaterialName.Should().BeEquivalentTo("cube_material");
         }
 
         [Test]
@@ -110,15 +110,13 @@ namespace ObjLoader.Test.Loaders
 
         private void Load()
         {
-            StreamReader objectStream = new StreamReader(CreateMemoryStreamFromString(ObjectFileString));
+            var objectStream = new StreamReader(CreateMemoryStreamFromString(ObjectFileString));
 
             _loadResult = _loader.Load(objectStream);
 
-            StreamReader mtlStream = new StreamReader(CreateMemoryStreamFromString(MaterialLibraryString));
+            var mtlStream = new StreamReader(CreateMemoryStreamFromString(MaterialLibraryString));
 
             _loadResultMtl = _loaderMtl.Load(mtlStream);
-
-
         }
 
         private Stream CreateMemoryStreamFromString(string str)

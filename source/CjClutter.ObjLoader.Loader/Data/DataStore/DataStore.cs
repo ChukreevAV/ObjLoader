@@ -20,30 +20,18 @@ namespace ObjLoader.Loader.Data.DataStore
         private readonly List<Normal> _normals = new List<Normal>();
         private readonly List<string> _mtlLibs = new List<string>();
 
-        public IList<Vertex> Vertices
-        {
-            get { return _vertices; }
-        }
+        public IList<Vertex> Vertices => _vertices;
 
-        public IList<Texture> Textures
-        {
-            get { return _textures; }
-        }
+        public IList<Texture> Textures => _textures;
 
-        public IList<Normal> Normals
-        {
-            get { return _normals; }
-        }
+        public IList<Normal> Normals => _normals;
 
         public IList<Group> Groups
         {
             get { return _groups.FindAll(g => g.Faces.Count != 0 || g.Lines.Count != 0); }
         }
 
-        public IList<string> MtlLibs
-        {
-            get { return _mtlLibs; }
-        }
+        public IList<string> MtlLibs => _mtlLibs;
 
         public void AddFace(Face face)
         {
@@ -87,25 +75,13 @@ namespace ObjLoader.Loader.Data.DataStore
             _groups.Add(_currentGroup);
         }
 
-        public void AddVertex(Vertex vertex)
-        {
-            _vertices.Add(vertex);
-        }
+        public void AddVertex(Vertex vertex) => _vertices.Add(vertex);
 
-        public void AddTexture(Texture texture)
-        {
-            _textures.Add(texture);
-        }
+        public void AddTexture(Texture texture) => _textures.Add(texture);
 
-        public void AddNormal(Normal normal)
-        {
-            _normals.Add(normal);
-        }
+        public void AddNormal(Normal normal) => _normals.Add(normal);
 
-        public void AddMtlLib(string mtlLib)
-        {
-           _mtlLibs.Add(mtlLib);
-        }
+        public void AddMtlLib(string mtlLib) => _mtlLibs.Add(mtlLib);
     }
 
     public class DataStoreMtl : IDataStoreMtl, IMaterialDataStore

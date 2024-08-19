@@ -8,9 +8,7 @@ namespace ObjLoader.Loader.TypeParsers
         protected abstract string Keyword { get; }
 
         public bool CanParse(string keyword)
-        {
-            return keyword.EqualsOrdinalIgnoreCase(Keyword);
-        }
+            => keyword.EqualsOrdinalIgnoreCase(Keyword);
 
         public abstract void Parse(string line);
     }

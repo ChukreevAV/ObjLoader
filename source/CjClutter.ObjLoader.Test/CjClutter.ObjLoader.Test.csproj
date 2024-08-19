@@ -9,6 +9,6 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CjClutter.ObjLoader.Loader.dll\CjClutter.ObjLoader.Loader.dll.csproj" />
+    <ProjectReference Include="..\CjClutter.ObjLoader.Loader\CjClutter.ObjLoader.Loader.csproj" />
   </ItemGroup>
 </Project>

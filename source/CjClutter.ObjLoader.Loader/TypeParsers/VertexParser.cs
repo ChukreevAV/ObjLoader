@@ -1,5 +1,5 @@
 using System;
-using ObjLoader.Loader.Data;
+
 using ObjLoader.Loader.Common;
 using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.Data.VertexData;
@@ -16,10 +16,7 @@ namespace ObjLoader.Loader.TypeParsers
             _vertexDataStore = vertexDataStore;
         }
 
-        protected override string Keyword
-        {
-            get { return "v"; }
-        }
+        protected override string Keyword => "v";
 
         public override void Parse(string line)
         {
