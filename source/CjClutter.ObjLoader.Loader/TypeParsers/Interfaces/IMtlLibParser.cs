@@ -1,6 +1,4 @@
 namespace ObjLoader.Loader.TypeParsers.Interfaces
 {
-    public interface IMtlLibParser : ITypeParser
-    {
-    }
+    public interface IMtlLibParser : ITypeParser {}
 }

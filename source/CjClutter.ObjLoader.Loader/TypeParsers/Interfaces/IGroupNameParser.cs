@@ -1,6 +1,4 @@
 namespace ObjLoader.Loader.TypeParsers.Interfaces
 {
-    public interface IGroupNameParser : ITypeParser
-    {
-    }
+    public interface IGroupNameParser : ITypeParser {}
 }

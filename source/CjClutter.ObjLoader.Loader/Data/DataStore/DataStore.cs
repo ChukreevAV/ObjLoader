@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using CjClutter.ObjLoader.Loader.Data.VertexData;
+
 using ObjLoader.Loader.Data.Elements;
 using ObjLoader.Loader.Data.VertexData;
 
@@ -17,11 +19,14 @@ namespace ObjLoader.Loader.Data.DataStore
 
         private readonly List<Group> _groups = new List<Group>();
         private readonly List<Vertex> _vertices = new List<Vertex>();
+        private readonly List<VertexParameter> _parameterVertices = new List<VertexParameter>();
         private readonly List<Texture> _textures = new List<Texture>();
         private readonly List<Normal> _normals = new List<Normal>();
         private readonly List<string> _mtlLibs = new List<string>();
 
         public IList<Vertex> Vertices => _vertices;
+
+        public IList<VertexParameter> ParameterVertices => _parameterVertices;
 
         public IList<Texture> Textures => _textures;
 
@@ -77,6 +82,8 @@ namespace ObjLoader.Loader.Data.DataStore
         }
 
         public void AddVertex(Vertex vertex) => _vertices.Add(vertex);
+
+        public void AddParameterVertex(VertexParameter vertex) => _parameterVertices.Add(vertex);
 
         public void AddTexture(Texture texture) => _textures.Add(texture);
 

@@ -24,6 +24,13 @@ namespace ObjLoader.Loader.TypeParsers
             float v = parts[1].ParseInvariantFloat();
 
             var texture = new Texture(u, v);
+
+            if (parts.Length > 2)
+            {
+                float w = parts[2].ParseInvariantFloat();
+                texture = new Texture(u, v, w);
+            }
+
             _textureDataStore.AddTexture(texture);
         }
     }

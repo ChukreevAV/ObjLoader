@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text;
+
 using ObjLoader.Loader.Data.DataStore;
 
 namespace ObjLoader.Loader.Data.Elements
@@ -18,6 +20,8 @@ namespace ObjLoader.Loader.Data.Elements
 
         public string GroupName { get; private set; }
 
+        public int? Smoothing { get; private set; }
+
         public string MaterialName { get; private set; }
 
         public string ObjectName { get; private set; }
@@ -29,5 +33,21 @@ namespace ObjLoader.Loader.Data.Elements
         public void AddFace(Face face) => _faces.Add(face);
 
         public void AddLine(Line line) => _lines.Add(line);
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            if (GroupName != "default") //TODO remove magic
+            {
+                sb.AppendLine($"g {GroupName}");
+            }
+
+            foreach (var face in _faces)
+            {
+                sb.AppendLine(face.ToString());
+            }
+
+            return sb.ToString();
+        }
     }
 }

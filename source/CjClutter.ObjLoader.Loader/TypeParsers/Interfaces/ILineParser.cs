@@ -1,11 +1,4 @@
-﻿using ObjLoader.Loader.TypeParsers.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ObjLoader.Loader.TypeParsers.Interfaces
+﻿namespace ObjLoader.Loader.TypeParsers.Interfaces
 {
-    public interface ILineParser : ITypeParser
-    {
-    }
+    public interface ILineParser : ITypeParser {}
 }

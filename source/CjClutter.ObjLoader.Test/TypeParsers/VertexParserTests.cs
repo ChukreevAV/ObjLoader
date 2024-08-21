@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using CjClutter.ObjLoader.Loader.Data.VertexData;
+
+using FluentAssertions;
 
 using NUnit.Framework;
 
@@ -64,6 +66,11 @@ namespace ObjLoader.Test.TypeParsers
             public void AddVertex(Vertex vertex)
             {
                 ParsedVertex = vertex;
+            }
+
+            public void AddParameterVertex(VertexParameter vertex)
+            {
+                throw new System.NotImplementedException();
             }
         }
     }

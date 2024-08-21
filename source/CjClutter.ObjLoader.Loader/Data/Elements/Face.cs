@@ -12,7 +12,7 @@ namespace ObjLoader.Loader.Data.Elements
 
         public int Count => _vertices.Count;
 
-        public string ToStr()
+        public override string ToString()
         {
             var str = "f";
 

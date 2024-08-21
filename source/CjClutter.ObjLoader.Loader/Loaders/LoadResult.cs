@@ -1,3 +1,4 @@
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 
@@ -38,7 +39,17 @@ namespace ObjLoader.Loader.Loaders
                 sb.AppendLine(n.ToString());
             }
 
-            return string.Empty;
+            foreach (var g in Groups)
+            {
+                sb.AppendLine(g.ToString());
+            }
+
+            return sb.ToString();
+        }
+
+        public void Save(string filename)
+        {
+            File.WriteAllText(filename, ToString());
         }
     }
 
