@@ -5,7 +5,8 @@ using ObjLoader.Loader.Data.VertexData;
 
 namespace ObjLoader.Loader.Data.DataStore
 {
-    public class DataStore : IDataStore, IFaceGroup, ILineGroup, IVertexDataStore, ITextureDataStore, INormalDataStore, IMtlLibDataStore,
+    public class DataStore : IDataStore, IFaceGroup, ILineGroup, IVertexDataStore,
+                             ITextureDataStore, INormalDataStore, IMtlLibDataStore,
                              IGroupNameDataStore, IMaterialNameDataStore, IObjectNameDataStore
     {
         private string _lastGroupName = "default";
@@ -82,20 +83,5 @@ namespace ObjLoader.Loader.Data.DataStore
         public void AddNormal(Normal normal) => _normals.Add(normal);
 
         public void AddMtlLib(string mtlLib) => _mtlLibs.Add(mtlLib);
-    }
-
-    public class DataStoreMtl : IDataStoreMtl, IMaterialDataStore
-    {
-        private readonly List<Material> _materials = new List<Material>();
-
-        public IList<Material> Materials
-        {
-            get { return _materials; }
-        }
-
-        public void Push(Material material)
-        {
-            _materials.Add(material);
-        }
     }
 }

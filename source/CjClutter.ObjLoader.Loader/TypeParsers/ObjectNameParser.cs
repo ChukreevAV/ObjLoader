@@ -1,9 +1,5 @@
 ﻿using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.TypeParsers.Interfaces;
-using ObjLoader.Loader.TypeParsers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ObjLoader.Loader.TypeParsers
 {
@@ -16,10 +12,7 @@ namespace ObjLoader.Loader.TypeParsers
             _objectNameDataStore = objectNameDataStore;
         }
 
-        protected override string Keyword
-        {
-            get { return "o"; }
-        }
+        protected override string Keyword => "o";
 
         public override void Parse(string line)
         {

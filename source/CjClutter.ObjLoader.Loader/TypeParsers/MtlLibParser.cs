@@ -12,10 +12,7 @@ namespace ObjLoader.Loader.TypeParsers
             _materialLibraryDataStore = materialLibraryDataStore;
         }
 
-        protected override string Keyword
-        {
-            get { return "mtllib"; }
-        }
+        protected override string Keyword => "mtllib";
 
         public override void Parse(string line)
         {

@@ -17,9 +17,4 @@ namespace ObjLoader.Loader.Data.DataStore
 
         IList<string> MtlLibs { get; }
     }
-
-    public interface IDataStoreMtl
-    {
-        IList<Material> Materials { get; }
-    }
 }

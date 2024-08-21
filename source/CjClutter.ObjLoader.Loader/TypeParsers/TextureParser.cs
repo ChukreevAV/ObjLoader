@@ -1,5 +1,4 @@
 ﻿using ObjLoader.Loader.Common;
-using ObjLoader.Loader.Data;
 using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.Data.VertexData;
 using ObjLoader.Loader.TypeParsers.Interfaces;
@@ -15,10 +14,7 @@ namespace ObjLoader.Loader.TypeParsers
             _textureDataStore = textureDataStore;
         }
 
-        protected override string Keyword
-        {
-            get { return "vt"; }
-        }
+        protected override string Keyword => "vt";
 
         public override void Parse(string line)
         {

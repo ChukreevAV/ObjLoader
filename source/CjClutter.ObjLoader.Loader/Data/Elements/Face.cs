@@ -6,35 +6,22 @@ namespace ObjLoader.Loader.Data.Elements
     {
         private readonly List<FaceVertex> _vertices = new List<FaceVertex>();
 
-        public void AddVertex(FaceVertex vertex)
+        public void AddVertex(FaceVertex vertex) => _vertices.Add(vertex);
+
+        public FaceVertex this[int i] => _vertices[i];
+
+        public int Count => _vertices.Count;
+
+        public string ToStr()
         {
-            _vertices.Add(vertex);
+            var str = "f";
+
+            foreach (var v in _vertices)
+            {
+                str += $" {v.ToStr()}";
+            }
+
+            return str;
         }
-
-        public FaceVertex this[int i]
-        {
-            get { return _vertices[i]; }
-        }
-
-        public int Count
-        {
-            get { return _vertices.Count; }
-        }
-    }
-
-    public struct FaceVertex
-    {
-        public FaceVertex(int vertexIndex, int textureIndex, int normalIndex) : this()
-        {
-            VertexIndex = vertexIndex;
-            TextureIndex = textureIndex;
-            NormalIndex = normalIndex;
-        }
-
-        public int VertexIndex { get; set; }
-
-        public int TextureIndex { get; set; }
-
-        public int NormalIndex { get; set; }
     }
 }

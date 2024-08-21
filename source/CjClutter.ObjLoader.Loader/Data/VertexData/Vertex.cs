@@ -1,3 +1,5 @@
+using ObjLoader.Loader.Common;
+
 namespace ObjLoader.Loader.Data.VertexData
 {
     public struct Vertex
@@ -41,5 +43,18 @@ namespace ObjLoader.Loader.Data.VertexData
         public float B { get; private set; }
 
         public float A { get; private set; }
+
+        public readonly override string ToString()
+        {
+            var str = $"v {X.FloatToStr()} {Y.FloatToStr()} {Z.FloatToStr()}";
+
+            if (W != 1 | (R != 1 | G != 1 | B != 1)) str += $" {W.FloatToStr()}";
+
+            if (R != 1 | G != 1 | B != 1) str += $" {R.FloatToStr()} {G.FloatToStr()} {B.FloatToStr()}";
+
+            if (A != 1) str += $" {A.FloatToStr()}";
+
+            return str;
+        }
     }
 }

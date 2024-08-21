@@ -47,9 +47,9 @@ namespace ObjLoader.Test.TypeParsers
             _normalParser.Parse(normalLine);
 
             var parsedNormal = _normalDataStoreMock.ParsedNormal;
-            parsedNormal.X.Should().BeApproximately(1, 0.000001f);
-            parsedNormal.Y.Should().BeApproximately(2, 0.000001f);
-            parsedNormal.Z.Should().BeApproximately(-1, 0.000001f);
+            parsedNormal.I.Should().BeApproximately(1, 0.000001f);
+            parsedNormal.J.Should().BeApproximately(2, 0.000001f);
+            parsedNormal.K.Should().BeApproximately(-1, 0.000001f);
         }
     }
 

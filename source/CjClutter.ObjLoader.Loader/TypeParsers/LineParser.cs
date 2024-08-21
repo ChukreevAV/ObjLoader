@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using ObjLoader.Loader.Common;
-using ObjLoader.Loader.Data;
 using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.Data.Elements;
 using ObjLoader.Loader.TypeParsers.Interfaces;
@@ -17,10 +17,7 @@ namespace ObjLoader.Loader.TypeParsers
             _lineGroup = lineGroup;
         }
 
-        protected override string Keyword
-        {
-            get { return "l"; }
-        }
+        protected override string Keyword => "l";
 
         public override void Parse(string line)
         {
@@ -35,8 +32,6 @@ namespace ObjLoader.Loader.TypeParsers
             Line _line = new Line();
             _line.AddIndexes(indexes.ToArray());
             _lineGroup.AddLine(_line);
-        }
-
-     
+        }     
     }
 }

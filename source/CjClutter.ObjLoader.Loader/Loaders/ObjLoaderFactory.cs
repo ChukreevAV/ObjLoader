@@ -3,15 +3,15 @@ using ObjLoader.Loader.TypeParsers;
 
 namespace ObjLoader.Loader.Loaders
 {
-    public class ObjLoaderFactory : IObjLoaderFactory
+    public class ObjLoaderFactory
     {
-        public IObjLoader Create()
+        public static IObjLoader Create()
         {
             var dataStore = new DataStore();
-            
+
             var faceParser = new FaceParser(dataStore);
             var lineParser = new LineParser(dataStore);
-        
+
             var normalParser = new NormalParser(dataStore);
             var textureParser = new TextureParser(dataStore);
             var vertexParser = new VertexParser(dataStore);

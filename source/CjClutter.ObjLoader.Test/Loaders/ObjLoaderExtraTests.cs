@@ -16,8 +16,8 @@ namespace ObjLoader.Test.Loaders
         [SetUp]
         public void SetUp()
         {
-            var loaderFactory = new ObjLoaderFactory();
-            _loader = loaderFactory.Create();
+            //var loaderFactory = new ObjLoaderFactory();
+            _loader = ObjLoaderFactory.Create();
         }
 
         [Test]
@@ -47,6 +47,7 @@ f 10 11 12
 usemtl material2
 f 13 14 15
 ";
+
         [Test]
         public void TestGroups()
         {
@@ -75,7 +76,6 @@ f 13 14 15
             Assert.IsTrue(_loadResult.Groups[4].MaterialName == "material2");
         }
 
-
         private string file2 =
   @"#coment
 g group
@@ -86,6 +86,7 @@ f 4 5 6
 usemtl material3
 f 7 8 9
 ";
+
         [Test]
         public void TestGroupsMaterial()
         {
@@ -113,8 +114,6 @@ v  9 12 15 18
 v 21 24 27 30 33 36
 v 39 42 45 48 51 54 57
 ";
-
-
 
         [Test]
         public void TestVerticeRGBA()
@@ -160,7 +159,6 @@ v 39 42 45 48 51 54 57
             Assert.IsTrue(_loadResult.Vertices[3].A == 57f);
         }
 
-
         private string file4 =
 @"#coment
 g group1
@@ -169,6 +167,7 @@ l 7 8 9 10 11
 g group2
 l 10 11 12 13
 ";
+
         [Test]
         public void TestLines()
         {
@@ -193,12 +192,12 @@ l 10 11 12 13
 
         }
 
-
         private string file5 =
 @"o obj1
 g group1
 usemtl material1
 ";
+
         [Test]
         public void TestGroupsNoFaces()
         {
@@ -213,6 +212,7 @@ g group1
 usemtl material1
 f 1 2 3
 ";
+
         [Test]
         public void TestGroupsOneFace()
         {
@@ -223,7 +223,6 @@ f 1 2 3
             Assert.IsTrue(_loadResult.Groups[0].GroupName == "group1");
             Assert.IsTrue(_loadResult.Groups[0].MaterialName == "material1");
         }
-
 
         private string file7 =
 @"o 

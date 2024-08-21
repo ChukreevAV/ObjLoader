@@ -1,5 +1,4 @@
 using ObjLoader.Loader.Common;
-using ObjLoader.Loader.Data;
 using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.Data.VertexData;
 using ObjLoader.Loader.TypeParsers.Interfaces;
@@ -15,10 +14,7 @@ namespace ObjLoader.Loader.TypeParsers
             _normalDataStore = normalDataStore;
         }
 
-        protected override string Keyword
-        {
-            get { return "vn"; }
-        }
+        protected override string Keyword => "vn";
 
         public override void Parse(string line)
         {

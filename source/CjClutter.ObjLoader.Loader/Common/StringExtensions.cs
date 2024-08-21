@@ -8,8 +8,14 @@ namespace ObjLoader.Loader.Common
         public static float ParseInvariantFloat(this string floatString)
             => float.Parse(floatString, CultureInfo.InvariantCulture.NumberFormat);
 
+        public static string FloatToStr(this float val)
+            => val.ToString(CultureInfo.InvariantCulture.NumberFormat);
+
         public static int ParseInvariantInt(this string intString)
             => int.Parse(intString, CultureInfo.InvariantCulture.NumberFormat);
+
+        public static string IntToStr(this int val)
+            => val.ToString(CultureInfo.InvariantCulture.NumberFormat);
 
         public static bool EqualsOrdinalIgnoreCase(this string str, string s)
             => str.Equals(s, StringComparison.OrdinalIgnoreCase);

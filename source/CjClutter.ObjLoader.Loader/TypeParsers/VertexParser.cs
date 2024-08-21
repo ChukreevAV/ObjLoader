@@ -7,6 +7,7 @@ using ObjLoader.Loader.TypeParsers.Interfaces;
 
 namespace ObjLoader.Loader.TypeParsers
 {
+    /// <summary>1.0 0.0 0.0</summary>
     public class VertexParser : TypeParserBase, IVertexParser
     {
         private readonly IVertexDataStore _vertexDataStore;
@@ -28,7 +29,7 @@ namespace ObjLoader.Loader.TypeParsers
 
             var vertex = new Vertex(x, y, z);
 
-            if (parts.Length == 4)
+            if(parts.Length == 4)
             {
                 var w = parts[3].ParseInvariantFloat();
                 vertex = new Vertex(x, y, z, w);

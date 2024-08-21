@@ -1,18 +1,23 @@
+using ObjLoader.Loader.Common;
+
 namespace ObjLoader.Loader.Data.VertexData
 {
     public struct Normal
     {
         public Normal(float x, float y, float z) : this()
         {
-            X = x;
-            Y = y;
-            Z = z;
+            I = x;
+            J = y;
+            K = z;
         }
 
-        public float X { get; private set; }
+        public float I { get; private set; }
 
-        public float Y { get; private set; }
+        public float J { get; private set; }
 
-        public float Z { get; private set; }
+        public float K { get; private set; }
+
+        public readonly override string ToString()
+            => $"vn {I.FloatToStr()} {J.FloatToStr()} {K.FloatToStr()}";
     }
 }

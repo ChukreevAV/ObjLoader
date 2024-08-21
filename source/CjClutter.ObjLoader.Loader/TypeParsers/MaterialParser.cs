@@ -1,9 +1,6 @@
-﻿using ObjLoader.Loader.TypeParsers.Interfaces;
-using ObjLoader.Loader.Data;
+﻿using ObjLoader.Loader.Data;
 using ObjLoader.Loader.Data.DataStore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ObjLoader.Loader.TypeParsers.Interfaces;
 
 namespace ObjLoader.Loader.TypeParsers
 {

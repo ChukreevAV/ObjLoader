@@ -1,5 +1,4 @@
-﻿using ObjLoader.Loader.Data;
-using ObjLoader.Loader.Data.DataStore;
+﻿using ObjLoader.Loader.Data.DataStore;
 using ObjLoader.Loader.TypeParsers.Interfaces;
 
 namespace ObjLoader.Loader.TypeParsers
@@ -13,10 +12,7 @@ namespace ObjLoader.Loader.TypeParsers
             _materialNameDataStore = materialNameDataStore;
         }
 
-        protected override string Keyword
-        {
-            get { return "usemtl"; }
-        }
+        protected override string Keyword => "usemtl";
 
         public override void Parse(string line)
         {

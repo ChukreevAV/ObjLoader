@@ -22,18 +22,12 @@ namespace ObjLoader.Loader.Data.Elements
 
         public string ObjectName { get; private set; }
 
-        public IList<Face> Faces { get { return _faces; } }
+        public IList<Face> Faces => _faces;
 
-        public IList<Line> Lines { get { return _lines; } }
+        public IList<Line> Lines => _lines;
 
-        public void AddFace(Face face)
-        {
-            _faces.Add(face);
-        }
+        public void AddFace(Face face) => _faces.Add(face);
 
-        public void AddLine(Line line)
-        {
-            _lines.Add(line);
-        }
+        public void AddLine(Line line) => _lines.Add(line);
     }
 }
